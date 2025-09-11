@@ -1,25 +1,61 @@
 {
   "short_name": "Finestracat",
-  "name": "Finestracat Aluminio - Ventanas y cerramientos en Cataluña",
+  "name": "Finestracat · Ventanas y cerramientos de aluminio y PVC en Cataluña",
+  "description": "Venta e instalación de ventanas y cerramientos de aluminio y PVC en toda Cataluña. Eficiencia energética, confort acústico y montaje profesional.",
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "16x16 32x32 48x48 64x64",
       "type": "image/x-icon"
     },
     {
+      "src": "logo72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "logo96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "logo128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "logo144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "logo152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
       "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "logo384.png",
+      "sizes": "384x384",
+      "type": "image/png"
     },
     {
       "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#0d3b66",
   "background_color": "#ffffff"
 }

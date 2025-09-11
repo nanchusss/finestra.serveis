@@ -1,11 +1,10 @@
 {
   "short_name": "Finestracat",
-  "name": "Finestracat · Ventanas y cerramientos de aluminio y PVC en Cataluña",
-  "description": "Venta e instalación de ventanas y cerramientos de aluminio y PVC en toda Cataluña. Eficiencia energética, confort acústico y montaje profesional.",
+  "name": "Finestracat - Ventanas y cerramientos de aluminio en Cataluña",
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "16x16 32x32 48x48 64x64",
+      "sizes": "16x16 24x24 32x32 48x48",
       "type": "image/x-icon"
     },
     {
@@ -56,6 +55,7 @@
   ],
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#0d3b66",
+  "theme_color": "#000000",
   "background_color": "#ffffff"
 }
+

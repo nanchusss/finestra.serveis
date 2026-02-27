@@ -1,7 +1,7 @@
 
 import Hero from "../Hero";
 import Stats from "../Stats";
-import VideoEmbed from "../VideoEmbed";
+
 import VanShowcase from "../VanShowCase";
 
 import WhatsAppFab from "../WhatsAppFab";

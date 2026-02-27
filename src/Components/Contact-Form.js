@@ -126,9 +126,9 @@ export default function ContactForm() {
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState(null);
 
-  const SERVICE_ID  = "service_nb2g1m5";
-  const TEMPLATE_ID = "template_h8b7bms";
-  const PUBLIC_KEY  = "-x8j7fLiSzznIBgT9";
+const SERVICE_ID  = process.env.REACT_APP_EMAIL_SERVICE;
+const TEMPLATE_ID = process.env.REACT_APP_EMAIL_TEMPLATE;
+const PUBLIC_KEY  = process.env.REACT_APP_EMAIL_PUBLIC;
 
   const onSubmit = async (e) => {
     e.preventDefault();

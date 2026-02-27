@@ -61,15 +61,7 @@ const Bullets = styled.ul`
   li { margin: 6px 0; }
 `;
 
-const CTA = styled.a`
-  display: inline-block;
-  padding: 12px 16px;
-  border-radius: 12px;
-  font-weight: 800;
-  background: ${p=>p.theme.colors.primary};
-  color: #fff;
-  &:hover{ filter: brightness(.95); }
-`;
+
 
 /* Separador suave entre servicios */
 const Divider = styled.div`

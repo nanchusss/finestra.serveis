@@ -1,255 +1,237 @@
-// src/components/Navbar.js
 import React, { useState } from "react";
 import styled from "styled-components";
-import { FaInstagram, FaFacebook, FaTiktok, FaWhatsapp, FaBars, FaTimes } from "react-icons/fa";
+import { FaInstagram, FaWhatsapp, FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import logo from "../Images/logo.png";
 
-const TRACKING_URL = "https://tu-pagina-de-tracking.com";
+/* ===== TOP STRIP ===== */
 
-/* ------- Top bar ------- */
 const TopStrip = styled.div`
-  background: ${(p) => p.theme.colors.text};
-  border-bottom: 1px solid ${(p) => p.theme.colors.border};
-  padding: 6px 0;
-  font-size: 14px;
-`;
-const TopInner = styled.div`
-  max-width: ${(p) => p.theme.maxw};
-  margin: 0 auto;
-  padding: 6px 20px;
-  display: flex; align-items: center; justify-content: flex-end;
-`;
-const Social = styled.div`
-  display: flex; align-items: center; gap: 12px;
-  a {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 32px; height: 32px; border-radius: 50%;
-    color: ${(p) => p.theme.colors.white};
-    background: ${(p) => p.theme.colors.primary};
-    transition: background .2s ease, transform .2s ease;
-  }
-  a:hover { background: ${(p) => p.theme.colors.secondary}; transform: scale(1.1); }
+  background: #111;
+  padding: 8px 0;
 `;
 
-/* ------- Navbar principal ------- */
+const TopInner = styled.div`
+  max-width: ${p => p.theme.maxw};
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const Social = styled.div`
+  display: flex;
+  gap: 12px;
+
+  a {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.08);
+    color: white;
+    transition: all .25s ease;
+  }
+
+  a:hover {
+    background: ${p => p.theme.colors.primary};
+    transform: translateY(-3px);
+  }
+`;
+
+/* ===== MAIN NAVBAR ===== */
+
 const Bar = styled.header`
-  position: sticky; top: 0; z-index: 80;
-  backdrop-filter: blur(8px);
-  padding: 40px;
-  background: rgba(255,255,255,.92);
-  border-bottom: 1px solid ${(p) => p.theme.colors.border};
-  
+  position: sticky;
+  top: 0;
+  z-index: 80;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid ${p => p.theme.colors.border};
 `;
 
 const Inner = styled.nav`
-  max-width: ${(p) => p.theme.maxw};
+  max-width: ${p => p.theme.maxw};
   margin: 0 auto;
-  height: 110px;
-  padding: 0 20px;
-  display: flex; align-items: center; justify-content: space-between;
-
-  @media (max-width: 720px){
-    height: 76px;
-  }
+  height: 148px;
+  padding: 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
+
+/* ===== LOGO ===== */
 
 const Brand = styled(Link)`
-  display: flex; align-items: center;
+  display: flex;
+  align-items: center;
   height: 100%;
-  padding: 6px 0;
+
+  &:hover img {
+    transform: scale(1.12);
+  }
 `;
-
-
 
 const Logo = styled.img`
-  height: 170px; width: auto; object-fit: contain;
-  padding: 25px; 
-  padding-top:10px;
-  padding-bottom:10px;
-  @media (max-width: 70%){ height: 50px; }
+  height: 194px;   /* aumenta tamaño real */
+  width: auto;
+  object-fit: contain;
+  display: block;
+
+  @media (max-width: 900px) {
+    height: 60px;
+  }
 `;
+
+/* ===== MENU DESKTOP ===== */
 
 const Actions = styled.div`
-  display: flex; gap: 16px; align-items: center;
-  a { color: ${(p) => p.theme.colors.text}; }
-  @media (max-width: 720px){ display: none; } /* se oculta en mobile */
-`;
+  display: flex;
+  align-items: center;
+  gap: 30px;
 
-const LinkItem = styled(Link)`
-  padding: 10px 8px; border-radius: 10px; font-weight: 500;
-  transition: background .2s ease;
-  font-size: 18px;
-  &:hover { background: ${(p) => p.theme.colors.neutral}; }
-`;
-
-const ExternalLink = styled.a`
-  padding: 10px 8px; border-radius: 10px; font-weight: 500;
-  transition: background .2s ease;
-  font-size: 18px; color: ${(p) => p.theme.colors.text};
-  &:hover { background: ${(p) => p.theme.colors.neutral}; }
-`;
-
-const Btn = styled(Link)`
-  padding: 10px 14px; border-radius: 12px; font-weight: 700; cursor: pointer;
-  border: 1px solid ${(p) => p.theme.colors.border};
-  background: ${(p) => p.theme.colors.white};
-  transition: transform .12s, box-shadow .12s, background .2s;
-  &:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,.08);
-            background: ${(p) => p.theme.colors.neutral}; }
-  &.primary{
-    background: ${(p) => p.theme.colors.primary}; color: #fff; border-color: transparent;
-    &:hover { filter: brightness(.95); }
+  @media (max-width: 900px) {
+    display: none;
   }
 `;
 
-/* ------- Botón hamburguesa (mobile) ------- */
+const NavLink = styled(Link)`
+  font-size: 16px;
+  font-weight: 500;
+  color: ${p => p.theme.colors.text};
+  text-decoration: none;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: ${p => p.theme.colors.primary};
+    transition: width .25s ease;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+`;
+
+const CTA = styled(Link)`
+  padding: 12px 22px;
+  border-radius: 50px;
+  font-weight: 700;
+  background: ${p => p.theme.colors.primary};
+  color: white;
+  text-decoration: none;
+  transition: all .25s ease;
+
+  &:hover {
+    background: ${p => p.theme.colors.primaryHover};
+    transform: translateY(-3px);
+  }
+`;
+
+/* ===== MOBILE ===== */
+
 const MenuToggle = styled.button`
   display: none;
-  @media (max-width: 720px){
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 42px; height: 42px; border-radius: 12px;
-    border: 1px solid ${(p) => p.theme.colors.border};
-    background: ${(p) => p.theme.colors.white};
-    color: ${(p) => p.theme.colors.text};
-  }
-`;
 
-/* ------- Menú móvil desplegable ------- */
-const MobileMenuBackdrop = styled.div`
-  position: fixed; inset: 0; z-index: 90;
-  background: rgba(0,0,0,.35);
-  opacity: ${(p) => (p.open ? 1 : 0)};
-  pointer-events: ${(p) => (p.open ? "auto" : "none")};
-  transition: opacity .2s ease;
+  @media (max-width: 900px) {
+    display: flex;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid ${p => p.theme.colors.border};
+    background: white;
+  }
 `;
 
 const MobileMenu = styled.aside`
-  position: fixed; top: 0; right: 0; z-index: 95;
-  width: min(84vw, 360px); height: 100%;
-  background: #fff; border-left: 1px solid ${(p) => p.theme.colors.border};
-  box-shadow: -10px 0 30px rgba(0,0,0,.08);
-  transform: translateX(${(p) => (p.open ? "0%" : "100%")});
-  transition: transform .25s ease;
-  display: flex; flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(90vw, 360px);
+  height: 100%;
+  background: #111;
+  color: white;
+  padding: 40px 30px;
+  transform: translateX(${p => (p.open ? "0%" : "100%")});
+  transition: transform .3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 `;
 
-const MobileHeader = styled.div`
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 16px; border-bottom: 1px solid ${(p) => p.theme.colors.border};
+const MobileLink = styled(Link)`
+  font-size: 22px;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
 `;
 
 const CloseBtn = styled.button`
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 40px; height: 40px; border-radius: 10px;
-  border: 1px solid ${(p) => p.theme.colors.border};
-  background: ${(p) => p.theme.colors.white};
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  color: white;
+  border: none;
 `;
 
-const MobileLinks = styled.div`
-  display: grid; gap: 6px; padding: 12px 12px 20px;
+/* ===== COMPONENT ===== */
 
-  a {
-    display: block; padding: 14px 12px; border-radius: 10px;
-    font-size: 18px; color: ${(p) => p.theme.colors.text};
-    text-decoration: none;
-    border: 1px solid ${(p) => p.theme.colors.border};
-    background: ${(p) => p.theme.colors.white};
-  }
-  a:hover { background: ${(p) => p.theme.colors.neutral}; }
-`;
-
-const MobileSocial = styled.div`
-  margin-top: auto; padding: 16px; border-top: 1px solid ${(p) => p.theme.colors.border};
-  display: flex; gap: 12px;
-  a{
-    display: inline-flex; width: 36px; height: 36px; border-radius: 50%;
-    align-items: center; justify-content: center;
-    background: ${(p) => p.theme.colors.primary}; color: #fff;
-  }
-`;
-
-/* ------- Componente ------- */
-export default function Navbar(){
+export default function Navbar() {
   const [open, setOpen] = useState(false);
-
-  const close = () => setOpen(false);
 
   return (
     <>
       <TopStrip>
         <TopInner>
-          {/* <a href={TRACKING_URL} target="_blank" rel="noreferrer" style={{color:'#fff', fontWeight:700}}>Rastrear envío</a> */}
           <Social>
-            <a href="https://instagram.com/base.mza" target="_blank" rel="noreferrer" aria-label="Instagram"><FaInstagram size={16} /></a>
-        
-            <a href="https://wa.me/542616490621"      target="_blank" rel="noreferrer" aria-label="WhatsApp"><FaWhatsapp size={16} /></a>
+            <a href="https://instagram.com/finestra.serveis" target="_blank" rel="noreferrer">
+              <FaInstagram size={16} />
+            </a>
+            <a href="https://wa.me/34691292245" target="_blank" rel="noreferrer">
+              <FaWhatsapp size={16} />
+            </a>
           </Social>
         </TopInner>
       </TopStrip>
 
       <Bar>
         <Inner>
-          <Brand to="/" aria-label="Inicio">
-            <Logo src={logo} alt="Base Mendoza Logística" />
+          <Brand to="/">
+            <Logo src={logo} alt="Finestra Serveis" />
           </Brand>
 
-          {/* Menú escritorio */}
           <Actions>
-            <LinkItem to="/servicios">Servicios</LinkItem>
-            <ExternalLink
-              href="https://www.google.com/maps?q=Los+Cedros+618+Godoy+Cruz+Mendoza"
-              target="_blank" rel="noreferrer"
-            >
-              Dirección
-            </ExternalLink>
-            <LinkItem to="/sobrenosotros">Sobre Nosotros</LinkItem>
-            <LinkItem to="/contacto">Contacto</LinkItem>
-            <Btn to="/contacto" className="primary">Solicitar presupuesto</Btn>
+            <NavLink to="/servicios">Servicios</NavLink>
+            <NavLink to="/sobrenosotros">Sobre Nosotros</NavLink>
+            <NavLink to="/contacto">Contacto</NavLink>
+            <CTA to="/contacto">Solicitar presupuesto</CTA>
           </Actions>
 
-          {/* Botón hamburguesa */}
-          <MenuToggle
-            aria-label="Abrir menú"
-            aria-expanded={open}
-            onClick={() => setOpen(true)}
-          >
+          <MenuToggle onClick={() => setOpen(true)}>
             <FaBars />
           </MenuToggle>
         </Inner>
       </Bar>
 
-      {/* Menú móvil */}
-      <MobileMenuBackdrop open={open} onClick={close} />
-      <MobileMenu open={open} aria-hidden={!open}>
-        <MobileHeader>
-          <img src={logo} alt="Base Mendoza Logística" style={{height: 36}} />
-          <CloseBtn aria-label="Cerrar menú" onClick={close}><FaTimes /></CloseBtn>
-        </MobileHeader>
+      <MobileMenu open={open}>
+        <CloseBtn onClick={() => setOpen(false)}>
+          <FaTimes size={24} />
+        </CloseBtn>
 
-        <MobileLinks onClick={close}>
-          <Link to="/servicios">Servicios</Link>
-          <a href="https://www.google.com/maps?q=Los+Cedros+618+Godoy+Cruz+Mendoza" target="_blank" rel="noreferrer">Dirección</a>
-          <Link to="/sobrenosotros">Sobre Nosotros</Link>
-          <Link to="/contacto">Contacto</Link>
-          <Link to="/contacto" style={{
-            background: "#00AEEF", color:"#fff", borderColor:"transparent", fontWeight:700, textAlign:"center"
-          }}>
-            Solicitar presupuesto
-          </Link>
-          <a href="https://wa.me/542616490621" target="_blank" rel="noreferrer" style={{
-            borderColor:"transparent", background:"#FF7A00", color:"#fff", textAlign:"center", fontWeight:700
-          }}>
-            WhatsApp
-          </a>
-        </MobileLinks>
-
-        <MobileSocial>
-          <a href="https://instagram.com/tu_cuenta" target="_blank" rel="noreferrer"><FaInstagram /></a>
-          <a href="https://facebook.com/tu_pagina"  target="_blank" rel="noreferrer"><FaFacebook /></a>
-          <a href="https://tiktok.com/@tu_cuenta"   target="_blank" rel="noreferrer"><FaTiktok /></a>
-          <a href="https://wa.me/542616490621"      target="_blank" rel="noreferrer"><FaWhatsapp /></a>
-        </MobileSocial>
+        <MobileLink to="/servicios" onClick={() => setOpen(false)}>Servicios</MobileLink>
+        <MobileLink to="/sobrenosotros" onClick={() => setOpen(false)}>Sobre Nosotros</MobileLink>
+        <MobileLink to="/contacto" onClick={() => setOpen(false)}>Contacto</MobileLink>
+        <MobileLink to="/contacto" onClick={() => setOpen(false)}>Solicitar presupuesto</MobileLink>
       </MobileMenu>
     </>
   );

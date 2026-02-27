@@ -1,14 +1,10 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { MyProvider } from "./Context";
-import App from "./App2";
+import { createRoot } from "react-dom/client";
+import App from "./App";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <MyProvider>
-      <App />
-    </MyProvider>
+    <App />
   </React.StrictMode>
 );

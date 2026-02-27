@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://finestracat.com/sitemap.xml
+Sitemap: https://www.base-mendoza.com/sitemap.xml

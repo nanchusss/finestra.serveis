@@ -2,50 +2,67 @@ import styled from "styled-components";
 
 const Section = styled.section`
   background: ${p => p.theme.colors.primary};
-  padding: 120px 20px;
+  padding: 100px 20px;
+
+  @media (max-width: 600px) {
+    padding: 70px 16px;
+  }
 `;
 
 const Grid = styled.div`
   max-width: ${p => p.theme.maxw};
   margin: 0 auto;
   display: grid;
-  gap: 28px;
+  gap: 20px;
   grid-template-columns: repeat(4, 1fr);
 
   @media (max-width: 900px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  /* 👇 En mobile sigue siendo 2 columnas */
   @media (max-width: 520px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 `;
 
 const Card = styled.div`
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 24px;
-  padding: 40px 28px;
+  border-radius: 20px;
+  padding: 30px 20px;
   text-align: left;
   transition: all .3s ease;
   backdrop-filter: blur(6px);
 
   &:hover {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     background: rgba(255,255,255,0.15);
+  }
+
+  @media (max-width: 600px) {
+    padding: 24px 16px;
   }
 `;
 
 const Big = styled.div`
-  font-size: 34px;
+  font-size: 28px;
   font-weight: 800;
   color: white;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+
+  @media (max-width: 600px) {
+    font-size: 20px;
+  }
 `;
 
 const Small = styled.div`
-  font-size: 15px;
-  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  color: rgba(255,255,255,0.85);
+
+  @media (max-width: 600px) {
+    font-size: 12px;
+  }
 `;
 
 export default function Stats(){

@@ -4,6 +4,63 @@ import { FaInstagram, FaWhatsapp, FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import logo from "../Images/logo.png";
 
+
+/* ===== COMPONENT ===== */
+
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <TopStrip>
+        <TopInner>
+          <Social>
+            <a href="https://instagram.com/finestra.serveis" target="_blank" rel="noreferrer">
+              <FaInstagram size={16} />
+            </a>
+            <a href="https://wa.me/34691292245" target="_blank" rel="noreferrer">
+              <FaWhatsapp size={16} />
+            </a>
+          </Social>
+        </TopInner>
+      </TopStrip>
+
+      <Bar>
+        <Inner>
+          <Brand to="/">
+            <Logo src={logo} alt="Finestra Serveis" />
+          </Brand>
+
+          <Actions>
+            <NavLink to="/servicios">Servicios</NavLink>
+            <NavLink to="/sobrenosotros">Sobre Nosotros</NavLink>
+            <NavLink to="/contacto">Contacto</NavLink>
+            <CTA to="/contacto">Solicitar presupuesto</CTA>
+          </Actions>
+
+          <MenuToggle onClick={() => setOpen(true)}>
+            <FaBars />
+          </MenuToggle>
+        </Inner>
+      </Bar>
+
+      <Overlay open={open} onClick={() => setOpen(false)} />
+
+      <MobileMenu open={open}>
+        <CloseBtn onClick={() => setOpen(false)}>
+          <FaTimes size={22} />
+        </CloseBtn>
+
+        <MobileLink to="/servicios" onClick={() => setOpen(false)}>Servicios</MobileLink>
+        <MobileLink to="/sobrenosotros" onClick={() => setOpen(false)}>Sobre Nosotros</MobileLink>
+        <MobileLink to="/contacto" onClick={() => setOpen(false)}>Contacto</MobileLink>
+        <MobileLink to="/contacto" onClick={() => setOpen(false)}>Solicitar presupuesto</MobileLink>
+      </MobileMenu>
+    </>
+  );
+}
+
+
 /* ===== TOP STRIP ===== */
 
 const TopStrip = styled.div`
@@ -84,7 +141,7 @@ const Logo = styled.img`
   transition: transform .3s ease;
 
   @media (max-width: 900px) {
-    height: 170px;
+    height: 110px;
   }
 `;
 
@@ -209,58 +266,3 @@ const CloseBtn = styled.button`
   cursor: pointer;
   color: ${p => p.theme.colors.text};
 `;
-
-/* ===== COMPONENT ===== */
-
-export default function Navbar() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <>
-      <TopStrip>
-        <TopInner>
-          <Social>
-            <a href="https://instagram.com/finestra.serveis" target="_blank" rel="noreferrer">
-              <FaInstagram size={16} />
-            </a>
-            <a href="https://wa.me/34691292245" target="_blank" rel="noreferrer">
-              <FaWhatsapp size={16} />
-            </a>
-          </Social>
-        </TopInner>
-      </TopStrip>
-
-      <Bar>
-        <Inner>
-          <Brand to="/">
-            <Logo src={logo} alt="Finestra Serveis" />
-          </Brand>
-
-          <Actions>
-            <NavLink to="/servicios">Servicios</NavLink>
-            <NavLink to="/sobrenosotros">Sobre Nosotros</NavLink>
-            <NavLink to="/contacto">Contacto</NavLink>
-            <CTA to="/contacto">Solicitar presupuesto</CTA>
-          </Actions>
-
-          <MenuToggle onClick={() => setOpen(true)}>
-            <FaBars />
-          </MenuToggle>
-        </Inner>
-      </Bar>
-
-      <Overlay open={open} onClick={() => setOpen(false)} />
-
-      <MobileMenu open={open}>
-        <CloseBtn onClick={() => setOpen(false)}>
-          <FaTimes size={22} />
-        </CloseBtn>
-
-        <MobileLink to="/servicios" onClick={() => setOpen(false)}>Servicios</MobileLink>
-        <MobileLink to="/sobrenosotros" onClick={() => setOpen(false)}>Sobre Nosotros</MobileLink>
-        <MobileLink to="/contacto" onClick={() => setOpen(false)}>Contacto</MobileLink>
-        <MobileLink to="/contacto" onClick={() => setOpen(false)}>Solicitar presupuesto</MobileLink>
-      </MobileMenu>
-    </>
-  );
-}

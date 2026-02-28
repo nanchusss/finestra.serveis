@@ -3,8 +3,6 @@ import Hero from "../Hero";
 import Stats from "../Stats";
 
 import VanShowcase from "../VanShowCase";
-
-import WhatsAppFab from "../WhatsAppFab";
 import Pasarela from "../Pasarela";
 import CucyoCoverage from "../CuyoCoverage";
 
@@ -17,11 +15,7 @@ export default function Home (){
       <CucyoCoverage/>
        <Pasarela/>
       <VanShowcase/>
-      
-     
-     
-      
-      <WhatsAppFab/>
+    
     </>
   );
 }

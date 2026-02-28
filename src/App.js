@@ -7,6 +7,7 @@ import SobreNosotros from "./Components/SobreNosotros.js";
 import Servicios from "./Components/Servicios.js";
 import Layout from "./Components/Layout.js";
 import ContactForm from "./Components/Contact-Form.js";
+import WhatsAppFab from "./Components/WhatsAppFab.js";
 
 const Global = createGlobalStyle`
   *, *::before, *::after {
@@ -51,6 +52,7 @@ export default function App() {
             <Route path="/servicios" element={<Servicios />} />
             <Route path="/contacto" element={<ContactForm />} />
           </Routes>
+          <WhatsAppFab />
         </Layout>
       </BrowserRouter>
     </ThemeProvider>

@@ -9,6 +9,14 @@ const Section = styled.section`
     #ffffff 100%
   );
   padding: 120px 20px;
+
+  @media (max-width: 900px) {
+    padding: 80px 18px;
+  }
+
+  @media (max-width: 500px) {
+    padding: 60px 16px;
+  }
 `;
 
 const Container = styled.div`
@@ -22,6 +30,10 @@ const Container = styled.div`
     grid-template-columns: 1fr;
     gap: 50px;
   }
+
+  @media (max-width: 500px) {
+    gap: 35px;
+  }
 `;
 
 const Left = styled.div`
@@ -30,12 +42,20 @@ const Left = styled.div`
     font-weight: 900;
     margin-bottom: 20px;
     line-height: 1.1;
+
+    @media (max-width: 500px) {
+      font-size: 26px;
+    }
   }
 
   p {
     color: ${p => p.theme.colors.muted};
     font-size: 18px;
     max-width: 420px;
+
+    @media (max-width: 500px) {
+      font-size: 15px;
+    }
   }
 `;
 
@@ -47,6 +67,12 @@ const Card = styled.form`
   box-shadow: 0 20px 50px rgba(0,0,0,0.06);
   display: grid;
   gap: 20px;
+
+  @media (max-width: 500px) {
+    padding: 28px 20px;
+    gap: 16px;
+    border-radius: 16px;
+  }
 `;
 
 const Field = styled.div`
@@ -58,6 +84,10 @@ const Field = styled.div`
     font-size: 14px;
     font-weight: 600;
     color: ${p => p.theme.colors.text};
+
+    @media (max-width: 500px) {
+      font-size: 13px;
+    }
   }
 `;
 
@@ -67,6 +97,11 @@ const Input = styled.input`
   border: 1px solid ${p => p.theme.colors.border};
   font-size: 15px;
   transition: all .2s ease;
+
+  @media (max-width: 500px) {
+    padding: 12px;
+    font-size: 14px;
+  }
 
   &:focus {
     outline: none;
@@ -83,6 +118,12 @@ const Textarea = styled.textarea`
   resize: vertical;
   font-size: 15px;
   transition: all .2s ease;
+
+  @media (max-width: 500px) {
+    padding: 12px;
+    font-size: 14px;
+    min-height: 110px;
+  }
 
   &:focus {
     outline: none;
@@ -102,6 +143,11 @@ const Button = styled.button`
   background: ${p => p.theme.colors.primary};
   color: white;
   transition: all .25s ease;
+
+  @media (max-width: 500px) {
+    padding: 14px;
+    font-size: 14px;
+  }
 
   &:hover {
     background: ${p => p.theme.colors.primaryHover};
@@ -126,9 +172,9 @@ export default function ContactForm() {
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState(null);
 
-const SERVICE_ID  = process.env.REACT_APP_EMAIL_SERVICE;
-const TEMPLATE_ID = process.env.REACT_APP_EMAIL_TEMPLATE;
-const PUBLIC_KEY  = process.env.REACT_APP_EMAIL_PUBLIC;
+  const SERVICE_ID  = process.env.REACT_APP_EMAIL_SERVICE;
+  const TEMPLATE_ID = process.env.REACT_APP_EMAIL_TEMPLATE;
+  const PUBLIC_KEY  = process.env.REACT_APP_EMAIL_PUBLIC;
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -146,6 +192,8 @@ const PUBLIC_KEY  = process.env.REACT_APP_EMAIL_PUBLIC;
       setSending(false);
     }
   };
+
+  console.log("PUBLIC:", PUBLIC_KEY);
 
   return (
     <Section id="contacto">

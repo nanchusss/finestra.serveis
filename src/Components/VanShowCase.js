@@ -148,7 +148,7 @@ export default function VanShowCase() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Solicitar estudio energético
+            Solicitar Asesoramiento Técnico
           </Button>
         </Text>
 

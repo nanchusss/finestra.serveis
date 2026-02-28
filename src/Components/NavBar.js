@@ -55,11 +55,15 @@ const Bar = styled.header`
 const Inner = styled.nav`
   max-width: ${p => p.theme.maxw};
   margin: 0 auto;
-  height: 148px;
-  padding: 20px 20px;
+  height: 170px;
+  padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 900px) {
+    height: 110px;
+  }
 `;
 
 /* ===== LOGO ===== */
@@ -67,25 +71,24 @@ const Inner = styled.nav`
 const Brand = styled(Link)`
   display: flex;
   align-items: center;
-  height: 100%;
 
   &:hover img {
-    transform: scale(1.12);
+    transform: scale(1.08);
   }
 `;
 
 const Logo = styled.img`
-  height: 194px;   /* aumenta tamaño real */
+  height: 150px;
   width: auto;
   object-fit: contain;
-  display: block;
+  transition: transform .3s ease;
 
   @media (max-width: 900px) {
-    height: 60px;
+    height: 170px;
   }
 `;
 
-/* ===== MENU DESKTOP ===== */
+/* ===== DESKTOP MENU ===== */
 
 const Actions = styled.div`
   display: flex;
@@ -149,7 +152,19 @@ const MenuToggle = styled.button`
     justify-content: center;
     border: 1px solid ${p => p.theme.colors.border};
     background: white;
+    cursor: pointer;
   }
+`;
+
+const Overlay = styled.div`
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  opacity: ${p => (p.open ? 1 : 0)};
+  pointer-events: ${p => (p.open ? "auto" : "none")};
+  transition: opacity .3s ease;
+  z-index: 79;
 `;
 
 const MobileMenu = styled.aside`
@@ -158,30 +173,41 @@ const MobileMenu = styled.aside`
   right: 0;
   width: min(90vw, 360px);
   height: 100%;
-  background: #111;
-  color: white;
-  padding: 40px 30px;
+  background: white;
+  color: ${p => p.theme.colors.text};
+  padding: 100px 30px 40px 30px;
   transform: translateX(${p => (p.open ? "0%" : "100%")});
-  transition: transform .3s ease;
+  transition: transform .35s cubic-bezier(.77,0,.18,1);
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 28px;
+  box-shadow: -20px 0 50px rgba(0,0,0,0.15);
+  z-index: 80;
 `;
 
 const MobileLink = styled(Link)`
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
-  color: white;
   text-decoration: none;
+  color: ${p => p.theme.colors.text};
+  padding-bottom: 8px;
+  border-bottom: 1px solid ${p => p.theme.colors.border};
+  transition: all .2s ease;
+
+  &:hover {
+    color: ${p => p.theme.colors.primary};
+    transform: translateX(6px);
+  }
 `;
 
 const CloseBtn = styled.button`
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 24px;
+  right: 24px;
   background: transparent;
-  color: white;
   border: none;
+  cursor: pointer;
+  color: ${p => p.theme.colors.text};
 `;
 
 /* ===== COMPONENT ===== */
@@ -223,9 +249,11 @@ export default function Navbar() {
         </Inner>
       </Bar>
 
+      <Overlay open={open} onClick={() => setOpen(false)} />
+
       <MobileMenu open={open}>
         <CloseBtn onClick={() => setOpen(false)}>
-          <FaTimes size={24} />
+          <FaTimes size={22} />
         </CloseBtn>
 
         <MobileLink to="/servicios" onClick={() => setOpen(false)}>Servicios</MobileLink>

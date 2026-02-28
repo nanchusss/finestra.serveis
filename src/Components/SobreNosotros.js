@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import aboutImg from "../Images/about.png";
+import aboutImg from "../Images/aluminio.png";
 
 const Section = styled.section`
   padding: 120px 20px 0;

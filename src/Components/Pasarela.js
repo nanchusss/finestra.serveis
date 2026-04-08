@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import imgAluminio from "../Images/aluminio.png";
 import imgPVC from "../Images/pvc.png";
@@ -54,6 +55,7 @@ const Card = styled.div`
   scroll-snap-align: start;
   flex-shrink: 0;
   transition: transform .4s ease;
+  cursor: pointer;
 
   &:hover {
     transform: scale(1.04);
@@ -104,14 +106,40 @@ const Desc = styled.p`
 `;
 
 export default function Pasarela() {
+  const navigate = useNavigate();
 
   const items = [
-    { img: imgAluminio, title: "Carpintería de Aluminio", desc: "Ventanas y cerramientos de alto rendimiento." },
-    { img: imgPVC, title: "Carpintería PVC", desc: "Aislamiento térmico y acústico superior." },
-    { img: imgEficiencia, title: "Eficiencia Energética", desc: "Optimización del consumo energético." },
-    { img: imgMosquiteras, title: "Mosquiteras a Medida", desc: "Soluciones discretas y funcionales." },
-    { img: imgToldos, title: "Toldos y Protección Solar", desc: "Control térmico para exteriores." },
-    { img: imgPergolas, title: "Pérgolas Bioclimáticas", desc: "Diseño contemporáneo y confort." },
+    {
+      img: imgAluminio,
+      title: "Carpintería de Aluminio",
+      desc: "Ventanas y cerramientos de alto rendimiento.",
+      link: "/ventanas-aluminio-cataluna"
+    },
+    {
+      img: imgPVC,
+      title: "Carpintería PVC",
+      desc: "Aislamiento térmico y acústico superior."
+    },
+    {
+      img: imgEficiencia,
+      title: "Eficiencia Energética",
+      desc: "Optimización del consumo energético."
+    },
+    {
+      img: imgMosquiteras,
+      title: "Mosquiteras a Medida",
+      desc: "Soluciones discretas y funcionales."
+    },
+    {
+      img: imgToldos,
+      title: "Toldos y Protección Solar",
+      desc: "Control térmico para exteriores."
+    },
+    {
+      img: imgPergolas,
+      title: "Pérgolas Bioclimáticas",
+      desc: "Diseño contemporáneo y confort."
+    }
   ];
 
   return (
@@ -124,7 +152,10 @@ export default function Pasarela() {
 
       <Slider>
         {items.map((it) => (
-          <Card key={it.title}>
+          <Card
+            key={it.title}
+            onClick={() => it.link && navigate(it.link)}
+          >
             <Bg src={it.img} alt={it.title} />
             <Overlay />
             <Content>

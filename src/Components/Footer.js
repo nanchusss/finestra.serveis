@@ -103,6 +103,8 @@ export default function Footer() {
             <h3>Finestra Serveis</h3>
             <p>
               Especialistas en cerramientos de aluminio y PVC en Cataluña.
+              Carpinteria profesional con proyectos reales.
+              Eficiencia energética. Renueva tus ventanas. Comprar ventanas.
               Instalación profesional, eficiencia energética y soluciones a medida.
             </p>
 
@@ -119,9 +121,9 @@ export default function Footer() {
 
           <Column>
             <h4>Servicios</h4>
-            <a href="#aluminio">Aluminio</a>
-            <a href="#pvc">PVC</a>
-            <a href="#eficiencia">Eficiencia energética</a>
+            <a href="#aluminio"> Carpinteria de Aluminio</a>
+            <a href="#pvc">Carpinteria de PVC</a>
+            <a href="#eficiencia">Puertas y Ventandas con eficiencia energética</a>
             <a href="#pergolas">Pérgolas bioclimáticas</a>
           </Column>
 

@@ -94,7 +94,7 @@ const ImageWrap = styled.div`
 
   img {
     width: 100%;
-    border-radius: 28px;
+    border-radius: 20px;
     object-fit: cover;
     box-shadow: 0 40px 80px rgba(0,0,0,0.18);
   }

@@ -158,7 +158,7 @@ const Actions = styled.div`
 `;
 
 const NavLink = styled(Link)`
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 500;
   color: ${p => p.theme.colors.text};
   text-decoration: none;

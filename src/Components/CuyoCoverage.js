@@ -149,7 +149,7 @@ export default function CuyoCoverage(){
         <MapCard>
           <MapImg 
             src={mapCuyo} 
-            alt="Mapa de cobertura en Cataluña"
+            alt="Mapa de cobertura en Cataluña. Cerramientos de Aluminio"
           />
         </MapCard>
       </Inner>

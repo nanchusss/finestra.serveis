@@ -1,6 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
+import { HelmetProvider } from "react-helmet-async";
 import { theme } from "./Components/styles/theme.js";
+
+
 
 import Home from "./Components/pages/Home.js";
 import SobreNosotros from "./Components/SobreNosotros.js";
@@ -8,6 +11,7 @@ import Servicios from "./Components/Servicios.js";
 import Layout from "./Components/Layout.js";
 import ContactForm from "./Components/Contact-Form.js";
 import WhatsAppFab from "./Components/WhatsAppFab.js";
+import VentanasAluminio from "./Components/pages/VentanasAluminio.js";
 
 const Global = createGlobalStyle`
   *, *::before, *::after {
@@ -42,19 +46,25 @@ const Global = createGlobalStyle`
 
 export default function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <Global />
-      <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/sobrenosotros" element={<SobreNosotros />} />
-            <Route path="/servicios" element={<Servicios />} />
-            <Route path="/contacto" element={<ContactForm />} />
-          </Routes>
-          <WhatsAppFab />
-        </Layout>
-      </BrowserRouter>
-    </ThemeProvider>
+    <HelmetProvider>
+      <ThemeProvider theme={theme}>
+        <Global />
+        <BrowserRouter>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/sobrenosotros" element={<SobreNosotros />} />
+              <Route path="/servicios" element={<Servicios />} />
+              <Route path="/contacto" element={<ContactForm />} />
+              <Route
+                path="/ventanas-aluminio-cataluna"
+                element={<VentanasAluminio />}
+              />
+            </Routes>
+            <WhatsAppFab />
+          </Layout>
+        </BrowserRouter>
+      </ThemeProvider>
+    </HelmetProvider>
   );
 }

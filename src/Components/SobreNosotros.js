@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Helmet } from "react-helmet-async";
-import about from "../Images/about.png";
+import about from "../Images/about.jpg";
 
 const Page=styled.main`background:${p=>p.theme.colors.cream};color:${p=>p.theme.colors.ink}`;
 const Hero=styled.section`position:relative;margin:0 18px;border-radius:24px;overflow:hidden;min-height:76vh;background:linear-gradient(0deg,rgba(13,28,18,.72),rgba(13,28,18,.08)),url(${about}) center/cover;display:flex;align-items:flex-end;padding:clamp(24px,5vw,68px);@media(max-width:600px){margin:0 10px;border-radius:18px;min-height:68vh}`;

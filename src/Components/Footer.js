@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { FiArrowUpRight, FiMapPin, FiPhone } from "react-icons/fi";
-import image from "../Images/hero-finestra-premium.png";
+import image from "../Images/hero-finestra-premium.jpg";
 import { useLanguage } from "../i18n";
 
 const Foot=styled.footer`position:relative;isolation:isolate;color:white;background:url(${image}) center 62%/cover;min-height:680px;padding:clamp(70px,9vw,130px) 28px 28px;display:flex;flex-direction:column;justify-content:space-between;

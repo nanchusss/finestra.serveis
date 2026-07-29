@@ -13,7 +13,7 @@ export default function Home() {
     "@id": "https://finestraserveis.com/#business",
     name: "Finestra Serveis",
     url: "https://finestraserveis.com/",
-    image: "https://finestraserveis.com/og-finestra-serveis.png",
+    image: "https://finestraserveis.com/og-finestra-serveis.jpg",
     telephone: "+34691292245",
     priceRange: "€€",
     areaServed: [
@@ -58,7 +58,7 @@ export default function Home() {
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://finestraserveis.com/" />
-        <meta property="og:image" content="https://finestraserveis.com/og-finestra-serveis.png" />
+        <meta property="og:image" content="https://finestraserveis.com/og-finestra-serveis.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </Helmet>

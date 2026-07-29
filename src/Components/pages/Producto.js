@@ -2,12 +2,12 @@ import { Navigate, Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import styled from "styled-components";
 import { FiArrowUpRight, FiCheck, FiSun, FiVolume2, FiThermometer, FiSliders, FiMaximize2, FiPenTool, FiTool, FiShield } from "react-icons/fi";
-import aluminio from "../../Images/aluminio.png";
-import pvc from "../../Images/pvc.png";
-import pergolas from "../../Images/pergolas.png";
-import toldos from "../../Images/toldos.png";
-import mosquiteras from "../../Images/almacenaje.png";
-import eficiencia from "../../Images/eficiencia.png";
+import aluminio from "../../Images/aluminio.jpg";
+import pvc from "../../Images/pvc.jpg";
+import pergolas from "../../Images/pergolas.jpg";
+import toldos from "../../Images/toldos.jpg";
+import mosquiteras from "../../Images/almacenaje.jpg";
+import eficiencia from "../../Images/eficiencia.jpg";
 
 const products = {
   "ventanas-aluminio": {
@@ -83,11 +83,19 @@ const Process=styled.section`background:${p=>p.theme.colors.ink};color:white;pad
 const ProcessInner=styled.div`max-width:${p=>p.theme.maxw};margin:auto`;
 const Steps=styled.div`display:grid;grid-template-columns:repeat(4,1fr);margin-top:65px;border-top:1px solid rgba(255,255,255,.25);@media(max-width:760px){grid-template-columns:1fr;margin-top:40px}`;
 const Step=styled.div`padding:28px 28px 20px 0;border-right:1px solid rgba(255,255,255,.16);svg{font-size:25px;color:#a9c0ad;margin-bottom:48px}span{display:block;font-size:10px;letter-spacing:.15em;color:rgba(255,255,255,.48)}h3{font-family:${p=>p.theme.fonts.display};font-size:22px;font-weight:500;margin:12px 0 8px}p{font-size:13px;line-height:1.6;color:rgba(255,255,255,.56);max-width:220px}@media(max-width:760px){display:grid;grid-template-columns:45px 1fr;padding:24px 0;border-right:0;border-bottom:1px solid rgba(255,255,255,.16);svg{margin:0}span,h3,p{grid-column:2}}`;
+const Faq=styled.div`margin-top:55px;border-top:1px solid ${p=>p.theme.colors.border}`;
+const Question=styled.details`border-bottom:1px solid ${p=>p.theme.colors.border};padding:22px 0;summary{cursor:pointer;font-family:${p=>p.theme.fonts.display};font-size:20px;font-weight:500}p{color:${p=>p.theme.colors.muted};line-height:1.7;max-width:760px}`;
 
 export default function Producto(){
   const {slug}=useParams(); const product=products[slug];
   if(!product) return <Navigate to="/servicios" replace/>;
   const canonical=`https://finestraserveis.com/productos/${slug}`;
+  const faqs=[
+    {q:`¿Realizáis ${product.name.toLowerCase()} a medida?`,a:"Sí. Medimos cada proyecto y definimos dimensiones, sistema, vidrio y acabado según el espacio y sus necesidades."},
+    {q:"¿En qué zonas trabajáis?",a:"Realizamos instalaciones en Barcelona, Granollers, Girona, Lleida, Tarragona y el resto de Cataluña."},
+    {q:"¿Cómo puedo pedir presupuesto?",a:"Puedes enviarnos el formulario o escribirnos por WhatsApp. Concertaremos una visita técnica para preparar una propuesta precisa."}
+  ];
+  const schema={"@context":"https://schema.org","@graph":[{"@type":"Service",name:product.name,description:product.seo,url:canonical,provider:{"@id":"https://finestraserveis.com/#business"},areaServed:{ "@type":"AdministrativeArea",name:"Cataluña"}},{"@type":"BreadcrumbList",itemListElement:[{"@type":"ListItem",position:1,name:"Inicio",item:"https://finestraserveis.com/"},{"@type":"ListItem",position:2,name:"Servicios",item:"https://finestraserveis.com/servicios"},{"@type":"ListItem",position:3,name:product.name,item:canonical}]},{"@type":"FAQPage",mainEntity:faqs.map(f=>({"@type":"Question",name:f.q,acceptedAnswer:{"@type":"Answer",text:f.a}}))}]};
   return <Page>
     <Helmet>
       <title>{product.name} en Cataluña | Finestra Serveis</title>
@@ -96,10 +104,14 @@ export default function Producto(){
       <meta property="og:title" content={`${product.name} | Finestra Serveis`}/>
       <meta property="og:description" content={product.seo}/>
       <meta property="og:type" content="website"/><meta property="og:url" content={canonical}/>
+      <meta property="og:image" content="https://finestraserveis.com/og-finestra-serveis.jpg"/>
+      <meta name="twitter:card" content="summary_large_image"/>
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
     </Helmet>
     <Hero $image={product.image}><Glass><Eyebrow>Finestra Serveis · Soluciones</Eyebrow><H1>{product.title}</H1><Intro>{product.intro}</Intro></Glass></Hero>
     <Tech><TechItem><FiThermometer/><div><strong>Aislamiento</strong><span>Confort térmico</span></div></TechItem><TechItem><FiVolume2/><div><strong>Silencio</strong><span>Control acústico</span></div></TechItem><TechItem><FiSun/><div><strong>Luz natural</strong><span>Bienestar interior</span></div></TechItem><TechItem><FiSliders/><div><strong>A medida</strong><span>Personalización total</span></div></TechItem></Tech>
     <Section><Grid><div><Eyebrow>Por qué elegirlo</Eyebrow><Heading>Rendimiento que se nota. Diseño que permanece.</Heading></div><List>{product.benefits.map(x=><Row key={x}><FiCheck/>{x}</Row>)}</List></Grid></Section>
+    <Section><Eyebrow>Preguntas frecuentes</Eyebrow><Heading>Antes de empezar.</Heading><Faq>{faqs.map(f=><Question key={f.q}><summary>{f.q}</summary><p>{f.a}</p></Question>)}</Faq></Section>
     <Process><ProcessInner><Eyebrow>Del concepto a la instalación</Eyebrow><Heading>Un proceso preciso. Un resultado impecable.</Heading><Steps><Step><FiMaximize2/><span>01 · MEDIMOS</span><h3>Visita técnica</h3><p>Estudiamos el hueco, la orientación y las necesidades reales.</p></Step><Step><FiPenTool/><span>02 · DISEÑAMOS</span><h3>Solución a medida</h3><p>Definimos sistema, vidrio, acabado y cada encuentro.</p></Step><Step><FiTool/><span>03 · INSTALAMOS</span><h3>Montaje cuidado</h3><p>Equipo propio, protección del espacio y máxima precisión.</p></Step><Step><FiShield/><span>04 · RESPONDEMOS</span><h3>Garantía real</h3><p>Revisión final y acompañamiento después de la obra.</p></Step></Steps></ProcessInner></Process>
     <Cta><Heading>¿Imaginamos juntos tu próximo espacio?</Heading><CtaLink to="/contacto">Solicitar asesoramiento <FiArrowUpRight/></CtaLink></Cta>
   </Page>

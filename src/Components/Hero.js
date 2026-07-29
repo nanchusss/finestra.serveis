@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Imagen from "../Images/hero-finestra-premium.png";
+import Imagen from "../Images/hero-finestra-premium.jpg";
 import { Link } from "react-router-dom";
 import { FiArrowDownRight, FiArrowUpRight } from "react-icons/fi";
 import { useLanguage } from "../i18n";

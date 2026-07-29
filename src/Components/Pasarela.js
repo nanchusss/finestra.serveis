@@ -2,12 +2,12 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FiArrowUpRight } from "react-icons/fi";
 import { useLanguage } from "../i18n";
-import aluminio from "../Images/aluminio.png";
-import pvc from "../Images/pvc.png";
-import eficiencia from "../Images/eficiencia.png";
-import mosquiteras from "../Images/almacenaje.png";
-import toldos from "../Images/toldos.png";
-import pergolas from "../Images/pergolas.png";
+import aluminio from "../Images/aluminio.jpg";
+import pvc from "../Images/pvc.jpg";
+import eficiencia from "../Images/eficiencia.jpg";
+import mosquiteras from "../Images/almacenaje.jpg";
+import toldos from "../Images/toldos.jpg";
+import pergolas from "../Images/pergolas.jpg";
 
 const products=[
   {n:"01",img:aluminio,title:"Ventanas de aluminio",desc:"Líneas mínimas, máxima luz y resistencia excepcional.",to:"/productos/ventanas-aluminio",featured:true},

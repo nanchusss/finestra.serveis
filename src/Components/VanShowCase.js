@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import van from "../Images/eficiencia.png";
+import van from "../Images/eficiencia.jpg";
 
 const Section = styled.section`
   max-width: ${p => p.theme.maxw};

@@ -4,7 +4,7 @@ import emailjs from "@emailjs/browser";
 import {Helmet} from "react-helmet-async";
 import {FiArrowUpRight,FiClock,FiMapPin,FiPhone} from "react-icons/fi";
 import {FaWhatsapp} from "react-icons/fa";
-import image from "../Images/contacto-finestra-premium.png";
+import image from "../Images/contacto-finestra-premium.jpg";
 import {useLanguage} from "../i18n";
 
 const Page=styled.main`background:${p=>p.theme.colors.cream};color:${p=>p.theme.colors.ink}`;

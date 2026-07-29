@@ -7,16 +7,43 @@ import Pasarela from "../Pasarela";
 import CucyoCoverage from "../CuyoCoverage";
 
 export default function Home() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "@id": "https://finestraserveis.com/#business",
+    name: "Finestra Serveis",
+    url: "https://finestraserveis.com/",
+    image: "https://finestraserveis.com/og-finestra-serveis.png",
+    telephone: "+34691292245",
+    priceRange: "€€",
+    areaServed: [
+      { "@type": "AdministrativeArea", name: "Cataluña" },
+      { "@type": "City", name: "Barcelona" },
+      { "@type": "City", name: "Granollers" },
+      { "@type": "City", name: "Girona" },
+      { "@type": "City", name: "Lleida" },
+      { "@type": "City", name: "Tarragona" }
+    ],
+    sameAs: ["https://instagram.com/finestra.serveis"],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Cerramientos y protección solar",
+      itemListElement: [
+        "Ventanas de aluminio", "Ventanas de PVC", "Pérgolas bioclimáticas",
+        "Toldos y protección solar", "Mosquiteras a medida"
+      ].map(name => ({ "@type": "Offer", itemOffered: { "@type": "Service", name } }))
+    }
+  };
   return (
     <>
       <Helmet>
         <title>
-          Carpinteria de aluminio y PVC en Barcelona | Finestra Serveis
+          Ventanas, cerramientos y pérgolas en Barcelona | Finestra Serveis
         </title>
 
         <meta
           name="description"
-          content="Especialistas en instalación de ventanas de aluminio y PVC en Barcelona, Granollers, Vallés Oriental. Mejora el aislamiento térmico y acústico de tu hogar. Cerramientos de alta calidad con diseño moderno y durabilidad garantizada.  Eficiencia energética"
+          content="Ventanas de aluminio y PVC, cerramientos, pérgolas bioclimáticas, toldos y mosquiteras en Barcelona y Cataluña. Diseño a medida e instalación profesional."
         />
 
         <meta name="robots" content="index, follow" />
@@ -31,11 +58,10 @@ export default function Home() {
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://finestraserveis.com/" />
+        <meta property="og:image" content="https://finestraserveis.com/og-finestra-serveis.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </Helmet>
-
-      <h1 style={{ display: "none" }}>
-        Ventanas de aluminio y PVC en Barcelona. Carpinteria de alta calidad para tu hogar. Carpinteria aluminio y PVC Granollers, Girona.
-      </h1>
 
       <Hero />
       <Stats />

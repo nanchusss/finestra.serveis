@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { FaInstagram, FaWhatsapp, FaBars, FaTimes } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../Images/logo.png";
+import { useLanguage } from "../i18n";
 
 
 /* ===== COMPONENT ===== */
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const {lang,setLang,t}=useLanguage();
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setOpen(false);
+  }, [location.pathname]);
 
   return (
     <>
@@ -32,10 +39,11 @@ export default function Navbar() {
           </Brand>
 
           <Actions>
-            <NavLink to="/servicios">Servicios</NavLink>
-            <NavLink to="/sobrenosotros">Sobre Nosotros</NavLink>
-            <NavLink to="/contacto">Contacto</NavLink>
-            <CTA to="/contacto">Solicitar presupuesto</CTA>
+            <NavLink to="/servicios">{t("services")}</NavLink>
+            <NavLink to="/sobrenosotros">{t("about")}</NavLink>
+            <NavLink to="/contacto">{t("contact")}</NavLink>
+            <Lang aria-label="Idioma" value={lang} onChange={e=>setLang(e.target.value)}><option value="es">ES</option><option value="ca">CA</option><option value="en">EN</option></Lang>
+            <CTA to="/contacto">{t("quote")}</CTA>
           </Actions>
 
           <MenuToggle onClick={() => setOpen(true)}>
@@ -51,10 +59,10 @@ export default function Navbar() {
           <FaTimes size={22} />
         </CloseBtn>
 
-        <MobileLink to="/servicios" onClick={() => setOpen(false)}>Servicios</MobileLink>
-        <MobileLink to="/sobrenosotros" onClick={() => setOpen(false)}>Sobre Nosotros</MobileLink>
-        <MobileLink to="/contacto" onClick={() => setOpen(false)}>Contacto</MobileLink>
-        <MobileLink to="/contacto" onClick={() => setOpen(false)}>Solicitar presupuesto</MobileLink>
+        <MobileLink to="/servicios">{t("services")}</MobileLink>
+        <MobileLink to="/sobrenosotros">{t("about")}</MobileLink>
+        <MobileLink to="/contacto">{t("contact")}</MobileLink>
+        <Lang value={lang} onChange={e=>setLang(e.target.value)}><option value="es">Castellano</option><option value="ca">Català</option><option value="en">English</option></Lang>
       </MobileMenu>
     </>
   );
@@ -64,8 +72,7 @@ export default function Navbar() {
 /* ===== TOP STRIP ===== */
 
 const TopStrip = styled.div`
-  background: #111;
-  padding: 8px 0;
+  display:none;
 `;
 
 const TopInner = styled.div`
@@ -104,22 +111,24 @@ const Bar = styled.header`
   position: sticky;
   top: 0;
   z-index: 80;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid ${p => p.theme.colors.border};
+  width:100%;margin:0;
+  background: rgba(247,245,239,0.78);
+  backdrop-filter: blur(22px) saturate(140%);
+  border-bottom: 1px solid rgba(47,71,53,.14);
+  box-shadow:0 10px 40px rgba(26,42,31,.08);
 `;
 
 const Inner = styled.nav`
   max-width: ${p => p.theme.maxw};
   margin: 0 auto;
-  height: 170px;
-  padding: 0 20px;
+  height: 88px;
+  padding: 0 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   @media (max-width: 900px) {
-    height: 110px;
+    height: 70px;
   }
 `;
 
@@ -135,13 +144,13 @@ const Brand = styled(Link)`
 `;
 
 const Logo = styled.img`
-  height: 150px;
+  height: 58px;
   width: auto;
   object-fit: contain;
   transition: transform .3s ease;
 
   @media (max-width: 900px) {
-    height: 110px;
+    height: 55px;
   }
 `;
 
@@ -150,7 +159,7 @@ const Logo = styled.img`
 const Actions = styled.div`
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 38px;
 
   @media (max-width: 900px) {
     display: none;
@@ -158,8 +167,10 @@ const Actions = styled.div`
 `;
 
 const NavLink = styled(Link)`
-  font-size: 19px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform:uppercase;
+  letter-spacing:.1em;
   color: ${p => p.theme.colors.text};
   text-decoration: none;
   position: relative;
@@ -181,9 +192,12 @@ const NavLink = styled(Link)`
 `;
 
 const CTA = styled(Link)`
-  padding: 12px 22px;
-  border-radius: 50px;
+  padding: 15px 20px;
+  border-radius: 0;
   font-weight: 700;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
   background: ${p => p.theme.colors.primary};
   color: white;
   text-decoration: none;
@@ -194,6 +208,7 @@ const CTA = styled(Link)`
     transform: translateY(-3px);
   }
 `;
+const Lang=styled.select`border:1px solid ${p=>p.theme.colors.border};background:rgba(255,255,255,.45);border-radius:9px;padding:10px 8px;color:${p=>p.theme.colors.ink};font:600 11px ${p=>p.theme.fonts.primary};cursor:pointer`;
 
 /* ===== MOBILE ===== */
 
@@ -204,7 +219,7 @@ const MenuToggle = styled.button`
     display: flex;
     width: 42px;
     height: 42px;
-    border-radius: 12px;
+    border-radius: 2px;
     align-items: center;
     justify-content: center;
     border: 1px solid ${p => p.theme.colors.border};
@@ -230,7 +245,7 @@ const MobileMenu = styled.aside`
   right: 0;
   width: min(90vw, 360px);
   height: 100%;
-  background: white;
+  background: ${p=>p.theme.colors.cream};
   color: ${p => p.theme.colors.text};
   padding: 100px 30px 40px 30px;
   transform: translateX(${p => (p.open ? "0%" : "100%")});

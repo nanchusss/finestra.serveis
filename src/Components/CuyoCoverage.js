@@ -1,12 +1,15 @@
 import styled from "styled-components";
-import mapCuyo from "../Images/map-cuyo.png";
+import { Link } from "react-router-dom";
+import CatalunyaMap from "./CatalunyaMap";
+import { FiMapPin, FiTool, FiMessageCircle, FiArrowUpRight } from "react-icons/fi";
 
 const Wrap = styled.section`
   position: relative;
   overflow: hidden;
-  margin: 100px 0 60px;
-  padding: 100px 0;
-  background: ${p => p.theme.colors.white};
+  margin: 0;
+  padding: 150px 0;
+  background: ${p => p.theme.colors.cream};
+  @media(max-width:600px){padding:90px 0}
 `;
 
 const Inner = styled.div`
@@ -38,8 +41,9 @@ const Eyebrow = styled.div`
 `;
 
 const H2 = styled.h2`
+  font-family:${p=>p.theme.fonts.display};
   font-size: clamp(34px, 4vw, 52px);
-  font-weight: 800;
+  font-weight: 400;
   line-height: 1.05;
   letter-spacing: -0.02em;
   margin: 0 0 22px;
@@ -59,9 +63,20 @@ const Ctas = styled.div`
   flex-wrap: wrap;
 `;
 
+const Benefits = styled.div`
+  display:grid;grid-template-columns:repeat(3,1fr);margin:34px 0 38px;border-top:1px solid ${p=>p.theme.colors.border};
+  @media(max-width:560px){grid-template-columns:1fr}
+`;
+const Benefit = styled.div`
+  padding:18px 12px 0 0;display:flex;align-items:center;gap:10px;color:${p=>p.theme.colors.muted};
+  font-size:11px;line-height:1.35;text-transform:uppercase;letter-spacing:.06em;
+  svg{flex:0 0 auto;font-size:20px;color:${p=>p.theme.colors.primary}}
+  @media(max-width:560px){padding:15px 0;border-bottom:1px solid ${p=>p.theme.colors.border}}
+`;
+
 const Btn = styled.a`
   padding: 16px 30px;
-  border-radius: 50px;
+  border-radius: 2px;
   font-weight: 700;
   font-size: 14px;
   text-decoration: none;
@@ -87,18 +102,27 @@ const Btn = styled.a`
   }
 `;
 
-const MapCard = styled.div`
-  position: relative;
-  border-radius: 28px;
-  overflow: hidden;
-  box-shadow: 0 40px 80px rgba(0,0,0,0.12);
-  aspect-ratio: 4 / 3;
+const ContactBtn = styled(Link)`
+  padding: 16px 30px;
+  border-radius: 2px;
+  font-weight: 700;
+  font-size: 14px;
+  border: 1px solid ${p => p.theme.colors.border};
+  color: ${p => p.theme.colors.text};
+  transition: all .25s ease;
+
+  &:hover {
+    background: ${p => p.theme.colors.neutral};
+    transform: translateY(-4px);
+  }
 `;
 
-const MapImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+const MapCard = styled.div`
+  position: relative;
+  padding:clamp(10px,3vw,32px);
+  border-left:1px solid ${p=>p.theme.colors.border};
+  background:transparent;
+  @media(max-width:960px){border-left:0;border-top:1px solid ${p=>p.theme.colors.border};padding-top:40px}
 `;
 
 const Accent = styled.div`
@@ -131,26 +155,29 @@ export default function CuyoCoverage(){
             Atención personalizada, instalación profesional y acabados de alta calidad.
           </P>
 
+          <Benefits>
+            <Benefit><FiMapPin/> Toda Cataluña</Benefit>
+            <Benefit><FiTool/> Instalación propia</Benefit>
+            <Benefit><FiMessageCircle/> Trato directo</Benefit>
+          </Benefits>
+
           <Ctas>
             <Btn 
               href="https://wa.me/34691292245" 
               target="_blank" 
               rel="noopener noreferrer"
             >
-              Solicitar asesoramiento
+              Solicitar asesoramiento <FiArrowUpRight style={{marginLeft:10}}/>
             </Btn>
 
-            <Btn href="#contacto" variant="ghost">
+            <ContactBtn to="/contacto">
               Ver contacto
-            </Btn>
+            </ContactBtn>
           </Ctas>
         </Copy>
 
         <MapCard>
-          <MapImg 
-            src={mapCuyo} 
-            alt="Mapa de cobertura en Cataluña. Cerramientos de Aluminio"
-          />
+          <CatalunyaMap />
         </MapCard>
       </Inner>
     </Wrap>

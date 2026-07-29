@@ -1,15 +1,12 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import emailjs from "@emailjs/browser";
+import { useLanguage } from "../i18n";
 
 /* ================= STYLES ================= */
 
 const Section = styled.section`
-  background: linear-gradient(
-    180deg,
-    ${p => p.theme.colors.neutral} 0%,
-    #ffffff 100%
-  );
+  background: ${p => p.theme.colors.cream};
   padding: 120px 20px;
 `;
 
@@ -28,8 +25,9 @@ const Container = styled.div`
 
 const Left = styled.div`
   h2 {
+    font-family:${p=>p.theme.fonts.display};
     font-size: clamp(32px, 4vw, 44px);
-    font-weight: 900;
+    font-weight: 400;
     margin-bottom: 20px;
   }
 
@@ -43,11 +41,12 @@ const Left = styled.div`
 const Card = styled.form`
   background: white;
   padding: 40px;
-  border-radius: 20px;
+  border-radius: 2px;
   border: 1px solid ${p => p.theme.colors.border};
   box-shadow: 0 20px 50px rgba(0,0,0,0.06);
   display: grid;
   gap: 18px;
+  @media(max-width:560px){padding:26px 18px}
 `;
 
 const Field = styled.div`
@@ -58,7 +57,7 @@ const Field = styled.div`
 
 const Input = styled.input`
   padding: 14px;
-  border-radius: 12px;
+  border-radius: 2px;
   border: 1px solid
     ${p => (p.error ? "#e74c3c" : p.theme.colors.border)};
   font-size: 15px;
@@ -72,7 +71,7 @@ const Input = styled.input`
 
 const Textarea = styled.textarea`
   padding: 14px;
-  border-radius: 12px;
+  border-radius: 2px;
   border: 1px solid
     ${p => (p.error ? "#e74c3c" : p.theme.colors.border)};
   min-height: 120px;
@@ -88,7 +87,7 @@ const ErrorMsg = styled.span`
 const Button = styled.button`
   margin-top: 10px;
   padding: 16px;
-  border-radius: 50px;
+  border-radius: 2px;
   font-weight: 800;
   border: none;
   cursor: pointer;
@@ -110,6 +109,7 @@ const Status = styled.div`
 /* ================= COMPONENT ================= */
 
 export default function ContactForm() {
+  const {t}=useLanguage();
   const formRef = useRef();
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState(null);
@@ -205,9 +205,9 @@ export default function ContactForm() {
     <Section id="contacto">
       <Container>
         <Left>
-          <h2>Solicita tu presupuesto</h2>
+          <h2>{t("contactTitle")}</h2>
           <p>
-            Cuéntanos qué necesitas y nuestro equipo te responderá con una solución personalizada.
+            {t("contactText")}
           </p>
         </Left>
 
@@ -220,7 +220,7 @@ export default function ContactForm() {
             <Input
               type="text"
               name="user_name"
-              placeholder="Nombre"
+              placeholder={t("name")}
               error={errors.user_name}
             />
             {errors.user_name && (
@@ -232,7 +232,7 @@ export default function ContactForm() {
             <Input
               type="email"
               name="user_email"
-              placeholder="Email"
+              placeholder={t("email")}
               error={errors.user_email}
             />
             {errors.user_email && (
@@ -244,7 +244,7 @@ export default function ContactForm() {
             <Input
               type="text"
               name="user_phone"
-              placeholder="Teléfono"
+              placeholder={t("phone")}
               error={errors.user_phone}
             />
             {errors.user_phone && (
@@ -255,7 +255,7 @@ export default function ContactForm() {
           <Field>
             <Textarea
               name="message"
-              placeholder="Mensaje (mínimo 10 palabras)"
+              placeholder={t("message")}
               error={errors.message}
             />
             {errors.message && (
@@ -264,7 +264,7 @@ export default function ContactForm() {
           </Field>
 
           <Button type="submit" disabled={sending}>
-            {sending ? "Enviando..." : "Enviar solicitud"}
+            {sending ? "…" : t("send")}
           </Button>
         </Card>
       </Container>

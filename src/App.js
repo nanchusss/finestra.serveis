@@ -11,9 +11,12 @@ import Servicios from "./Components/Servicios.js";
 import Layout from "./Components/Layout.js";
 import ContactForm from "./Components/Contact-Form.js";
 import WhatsAppFab from "./Components/WhatsAppFab.js";
-import VentanasAluminio from "./Components/pages/VentanasAluminio.js";
+import { Navigate } from "react-router-dom";
+import Producto from "./Components/pages/Producto.js";
+import { LanguageProvider } from "./i18n";
 
 const Global = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
   *, *::before, *::after {
     box-sizing: border-box;
   }
@@ -25,6 +28,7 @@ const Global = createGlobalStyle`
     background: ${p => p.theme.colors.white};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   img {
@@ -40,13 +44,15 @@ const Global = createGlobalStyle`
   h1, h2, h3, h4, h5 {
     margin: 0;
     font-weight: 700;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.035em;
   }
+
+  ::selection { background: ${p => p.theme.colors.primary}; color: white; }
 `;
 
 export default function App() {
   return (
-    <HelmetProvider>
+    <HelmetProvider><LanguageProvider>
       <ThemeProvider theme={theme}>
         <Global />
         <BrowserRouter>
@@ -56,15 +62,13 @@ export default function App() {
               <Route path="/sobrenosotros" element={<SobreNosotros />} />
               <Route path="/servicios" element={<Servicios />} />
               <Route path="/contacto" element={<ContactForm />} />
-              <Route
-                path="/ventanas-aluminio-cataluna"
-                element={<VentanasAluminio />}
-              />
+              <Route path="/ventanas-aluminio-cataluna" element={<Navigate to="/productos/ventanas-aluminio" replace />} />
+              <Route path="/productos/:slug" element={<Producto />} />
             </Routes>
             <WhatsAppFab />
           </Layout>
         </BrowserRouter>
       </ThemeProvider>
-    </HelmetProvider>
+    </LanguageProvider></HelmetProvider>
   );
 }

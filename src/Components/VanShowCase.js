@@ -34,8 +34,9 @@ const Eyebrow = styled.div`
 `;
 
 const Title = styled.h2`
+  font-family:${p=>p.theme.fonts.display};
   font-size: clamp(40px, 4.5vw, 60px);
-  font-weight: 800;
+  font-weight: 400;
   line-height: 1.05;
   letter-spacing: -0.02em;
   margin: 0 0 26px;
@@ -82,7 +83,7 @@ const Button = styled.a`
   background: ${p => p.theme.colors.primary};
   color: white;
   font-weight: 700;
-  border-radius: 50px;
+  border-radius: 2px;
   text-decoration: none;
   transition: all .25s ease;
 
@@ -97,7 +98,7 @@ const Visual = styled.div`
 
   img {
     width: 100%;
-    border-radius: 32px;
+    border-radius: 2px;
     object-fit: cover;
     box-shadow: 0 50px 100px rgba(0,0,0,0.18);
   }

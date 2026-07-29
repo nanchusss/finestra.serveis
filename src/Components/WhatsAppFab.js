@@ -17,7 +17,7 @@ const Fab = styled.a`
 export default function WhatsAppFab(){
   return (
     <Fab 
-      href="https://wa.me/34691292245" 
+      href="https://wa.me/34691292245?text=Hola%2C%20escribo%20desde%20la%20p%C3%A1gina%20web%20de%20Finestra%20Serveis.%20Quisiera%20solicitar%20informaci%C3%B3n%20sobre%20un%20proyecto." 
       target="_blank" 
       aria-label="WhatsApp"
     >

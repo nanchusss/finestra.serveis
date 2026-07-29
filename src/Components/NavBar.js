@@ -25,7 +25,7 @@ export default function Navbar() {
             <a href="https://instagram.com/finestra.serveis" target="_blank" rel="noreferrer">
               <FaInstagram size={16} />
             </a>
-            <a href="https://wa.me/34691292245" target="_blank" rel="noreferrer">
+            <a href="https://wa.me/34691292245?text=Hola%2C%20escribo%20desde%20la%20p%C3%A1gina%20web%20de%20Finestra%20Serveis.%20Quisiera%20solicitar%20informaci%C3%B3n%20sobre%20un%20proyecto." target="_blank" rel="noreferrer">
               <FaWhatsapp size={16} />
             </a>
           </Social>

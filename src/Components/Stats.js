@@ -67,7 +67,7 @@ const Big = styled.div`
 `;
 
 const Small = styled.div`
-  font-size: 12px;
+  font-size: 14px;
   text-transform:uppercase;
   letter-spacing:.08em;
   color: ${p=>p.theme.colors.muted};
@@ -75,7 +75,7 @@ const Small = styled.div`
   line-height:1.55;
 
   @media (max-width: 600px) {
-    font-size: 12px;
+    font-size: 14px;
   }
 `;
 

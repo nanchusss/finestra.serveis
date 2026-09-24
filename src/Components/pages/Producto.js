@@ -1,7 +1,7 @@
 import { Navigate, Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import styled from "styled-components";
-import { FiArrowUpRight, FiCheck, FiSun, FiVolume2, FiThermometer, FiSliders, FiMaximize2, FiPenTool, FiTool, FiShield } from "react-icons/fi";
+import { FiArrowUpRight, FiCheck, FiSun, FiVolume2, FiThermometer, FiSliders } from "react-icons/fi";
 import aluminio from "../../Images/aluminio.jpg";
 import pvc from "../../Images/pvc.jpg";
 import pergolas from "../../Images/pergolas.jpg";
@@ -78,11 +78,34 @@ const Row=styled.div`display:flex;gap:18px;align-items:center;padding:22px 0;bor
 const Cta=styled.section`margin:0 28px 28px;padding:clamp(60px,8vw,110px);background:${p=>p.theme.colors.primary};color:white;display:flex;align-items:end;justify-content:space-between;gap:30px;@media(max-width:700px){margin:0;padding:60px 20px;display:block}`;
 const CtaLink=styled(Link)`display:inline-flex;gap:34px;align-items:center;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(12px);padding:18px 22px;margin-top:30px;text-transform:uppercase;font-size:12px;letter-spacing:.1em;@media(max-width:560px){width:100%;justify-content:space-between}`;
 const Tech=styled.section`border-top:1px solid ${p=>p.theme.colors.border};border-bottom:1px solid ${p=>p.theme.colors.border};display:grid;grid-template-columns:repeat(4,1fr);@media(max-width:700px){grid-template-columns:repeat(2,1fr)}`;
-const TechItem=styled.div`min-height:180px;padding:30px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid ${p=>p.theme.colors.border};svg{font-size:28px;color:${p=>p.theme.colors.primary}}strong{font-family:${p=>p.theme.fonts.display};font-size:19px;font-weight:500}span{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:${p=>p.theme.colors.muted}}@media(max-width:700px){min-height:150px;padding:22px;border-bottom:1px solid ${p=>p.theme.colors.border}}`;
+const TechItem=styled.div`
+  min-width:0;min-height:180px;padding:30px;display:flex;flex-direction:column;gap:24px;
+  border-right:1px solid ${p=>p.theme.colors.border};
+  &:last-child{border-right:0}
+  svg{font-size:28px;flex-shrink:0;color:${p=>p.theme.colors.primary}}
+  > div{display:flex;flex-direction:column;gap:8px;min-width:0}
+  strong{display:block;font-family:${p=>p.theme.fonts.display};font-size:23px;font-weight:500;line-height:1.2}
+  span{display:block;font-size:14px;line-height:1.5;text-transform:uppercase;letter-spacing:.04em;color:${p=>p.theme.colors.muted};overflow-wrap:break-word}
+  @media(max-width:700px){min-height:170px;padding:22px 18px;border-bottom:1px solid ${p=>p.theme.colors.border};strong{font-size:22px}&:nth-child(2n){border-right:0}}
+`;
 const Process=styled.section`background:${p=>p.theme.colors.ink};color:white;padding:clamp(90px,10vw,140px) 28px`;
 const ProcessInner=styled.div`max-width:${p=>p.theme.maxw};margin:auto`;
-const Steps=styled.div`display:grid;grid-template-columns:repeat(4,1fr);margin-top:65px;border-top:1px solid rgba(255,255,255,.25);@media(max-width:760px){grid-template-columns:1fr;margin-top:40px}`;
-const Step=styled.div`padding:28px 28px 20px 0;border-right:1px solid rgba(255,255,255,.16);svg{font-size:25px;color:#a9c0ad;margin-bottom:48px}span{display:block;font-size:10px;letter-spacing:.15em;color:rgba(255,255,255,.48)}h3{font-family:${p=>p.theme.fonts.display};font-size:22px;font-weight:500;margin:12px 0 8px}p{font-size:13px;line-height:1.6;color:rgba(255,255,255,.56);max-width:220px}@media(max-width:760px){display:grid;grid-template-columns:45px 1fr;padding:24px 0;border-right:0;border-bottom:1px solid rgba(255,255,255,.16);svg{margin:0}span,h3,p{grid-column:2}}`;
+const ProcessHeading=styled.h2`
+  font-family:${p=>p.theme.fonts.display};font-size:clamp(36px,4.2vw,58px);font-weight:500;line-height:1.08;letter-spacing:-.035em;max-width:860px;
+`;
+const Steps=styled.ol`
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin:42px 0 0;padding:0;list-style:none;
+  @media(max-width:1050px){grid-template-columns:repeat(2,minmax(0,1fr))}
+  @media(max-width:620px){grid-template-columns:1fr;gap:14px;margin-top:30px}
+`;
+const Step=styled.li`
+  min-width:0;padding:28px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.18);border-top:2px solid #a9c0ad;
+  b{display:block;font-family:${p=>p.theme.fonts.display};font-size:40px;line-height:1;font-weight:400;color:#bfd0bf;margin-bottom:28px}
+  span{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#bfd0bf}
+  h3{font-family:${p=>p.theme.fonts.display};font-size:26px;line-height:1.15;font-weight:500;margin:12px 0 16px}
+  p{font-size:18px;line-height:1.65;color:rgba(255,255,255,.88);margin:0}
+  @media(max-width:620px){display:grid;grid-template-columns:38px minmax(0,1fr);gap:0 20px;padding:24px 20px;b{font-size:32px;grid-column:1;grid-row:1/4;margin:0}span,h3,p{grid-column:2}h3{font-size:25px;margin:9px 0 12px}}
+`;
 const Faq=styled.div`margin-top:55px;border-top:1px solid ${p=>p.theme.colors.border}`;
 const Question=styled.details`border-bottom:1px solid ${p=>p.theme.colors.border};padding:22px 0;summary{cursor:pointer;font-family:${p=>p.theme.fonts.display};font-size:20px;font-weight:500}p{color:${p=>p.theme.colors.muted};line-height:1.7;max-width:760px}`;
 
@@ -109,10 +132,10 @@ export default function Producto(){
       <script type="application/ld+json">{JSON.stringify(schema)}</script>
     </Helmet>
     <Hero $image={product.image}><Glass><Eyebrow>Finestra Serveis · Soluciones</Eyebrow><H1>{product.title}</H1><Intro>{product.intro}</Intro></Glass></Hero>
-    <Tech><TechItem><FiThermometer/><div><strong>Aislamiento</strong><span>Confort térmico</span></div></TechItem><TechItem><FiVolume2/><div><strong>Silencio</strong><span>Control acústico</span></div></TechItem><TechItem><FiSun/><div><strong>Luz natural</strong><span>Bienestar interior</span></div></TechItem><TechItem><FiSliders/><div><strong>A medida</strong><span>Personalización total</span></div></TechItem></Tech>
+    <Tech aria-label="Beneficios de nuestras soluciones"><TechItem><FiThermometer/><div><strong>Aislamiento</strong><span>Confort térmico</span></div></TechItem><TechItem><FiVolume2/><div><strong>Silencio</strong><span>Control acústico</span></div></TechItem><TechItem><FiSun/><div><strong>Luz natural</strong><span>Bienestar interior</span></div></TechItem><TechItem><FiSliders/><div><strong>A medida</strong><span>Personalización total</span></div></TechItem></Tech>
     <Section><Grid><div><Eyebrow>Por qué elegirlo</Eyebrow><Heading>Rendimiento que se nota. Diseño que permanece.</Heading></div><List>{product.benefits.map(x=><Row key={x}><FiCheck/>{x}</Row>)}</List></Grid></Section>
     <Section><Eyebrow>Preguntas frecuentes</Eyebrow><Heading>Antes de empezar.</Heading><Faq>{faqs.map(f=><Question key={f.q}><summary>{f.q}</summary><p>{f.a}</p></Question>)}</Faq></Section>
-    <Process><ProcessInner><Eyebrow>Del concepto a la instalación</Eyebrow><Heading>Un proceso preciso. Un resultado impecable.</Heading><Steps><Step><FiMaximize2/><span>01 · MEDIMOS</span><h3>Visita técnica</h3><p>Estudiamos el hueco, la orientación y las necesidades reales.</p></Step><Step><FiPenTool/><span>02 · DISEÑAMOS</span><h3>Solución a medida</h3><p>Definimos sistema, vidrio, acabado y cada encuentro.</p></Step><Step><FiTool/><span>03 · INSTALAMOS</span><h3>Montaje cuidado</h3><p>Equipo propio, protección del espacio y máxima precisión.</p></Step><Step><FiShield/><span>04 · RESPONDEMOS</span><h3>Garantía real</h3><p>Revisión final y acompañamiento después de la obra.</p></Step></Steps></ProcessInner></Process>
+    <Process><ProcessInner><Eyebrow>Del concepto a la instalación</Eyebrow><ProcessHeading>Así resolvemos tu proyecto, paso a paso.</ProcessHeading><Steps aria-label="Proceso de trabajo"><Step><b aria-hidden="true">01</b><span>Medimos</span><h3>Visita técnica</h3><p>Estudiamos el hueco, la orientación y las necesidades reales.</p></Step><Step><b aria-hidden="true">02</b><span>Diseñamos</span><h3>Solución a medida</h3><p>Definimos sistema, vidrio, acabado y cada encuentro.</p></Step><Step><b aria-hidden="true">03</b><span>Instalamos</span><h3>Montaje cuidado</h3><p>Equipo propio, protección del espacio y máxima precisión.</p></Step><Step><b aria-hidden="true">04</b><span>Respondemos</span><h3>Garantía real</h3><p>Revisión final y acompañamiento después de la obra.</p></Step></Steps></ProcessInner></Process>
     <Cta><Heading>¿Imaginamos juntos tu próximo espacio?</Heading><CtaLink to="/contacto">Solicitar asesoramiento <FiArrowUpRight/></CtaLink></Cta>
   </Page>
 }

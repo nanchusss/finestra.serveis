@@ -3,6 +3,7 @@
   <url><loc>https://finestraserveis.com/</loc><priority>1.0</priority></url>
   <url><loc>https://finestraserveis.com/servicios</loc><priority>0.9</priority></url>
   <url><loc>https://finestraserveis.com/sobrenosotros</loc><priority>0.7</priority></url>
+  <url><loc>https://finestraserveis.com/profesionales</loc><priority>0.9</priority></url>
   <url><loc>https://finestraserveis.com/contacto</loc><priority>0.8</priority></url>
   <url><loc>https://finestraserveis.com/productos/ventanas-aluminio</loc><priority>0.9</priority></url>
   <url><loc>https://finestraserveis.com/productos/ventanas-pvc</loc><priority>0.9</priority></url>
@@ -10,4 +11,8 @@
   <url><loc>https://finestraserveis.com/productos/toldos-proteccion-solar</loc><priority>0.9</priority></url>
   <url><loc>https://finestraserveis.com/productos/mosquiteras</loc><priority>0.8</priority></url>
   <url><loc>https://finestraserveis.com/productos/eficiencia-energetica</loc><priority>0.8</priority></url>
+  <url><loc>https://finestraserveis.com/profesionales/suministro</loc><priority>0.8</priority></url>
+  <url><loc>https://finestraserveis.com/profesionales/apoyo-tecnico</loc><priority>0.8</priority></url>
+  <url><loc>https://finestraserveis.com/profesionales/instalacion</loc><priority>0.8</priority></url>
+  <url><loc>https://finestraserveis.com/profesionales/asesoramiento-tecnico</loc><priority>0.8</priority></url>
 </urlset>

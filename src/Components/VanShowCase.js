@@ -98,7 +98,7 @@ const Visual = styled.div`
 
   img {
     width: 100%;
-    border-radius: 2px;
+    border-radius: 0;
     object-fit: cover;
     box-shadow: 0 50px 100px rgba(0,0,0,0.18);
   }

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 234 56" fill="none">
+  <title>Finestra Serveis</title>
+  <g fill="#42634A">
+    <path d="M4 6h34v7H12v12h22v7H12v18H4V6Z"/>
+    <path d="M38 21h7v29H20v-7h18V21Z"/>
+  </g>
+  <text x="61" y="29" fill="#18231C" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="25" font-weight="700" letter-spacing="1.1">FINESTRA</text>
+  <text x="62" y="47" fill="#42634A" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="4.3">SERVEIS</text>
+</svg>

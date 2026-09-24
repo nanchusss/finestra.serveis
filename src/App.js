@@ -5,6 +5,8 @@ import { theme } from "./Components/styles/theme.js";
 
 
 
+import ServicioProfesional from "./Components/pages/ServicioProfesional.js";
+import Profesionales from "./Components/pages/Profesionales.js";
 import Home from "./Components/pages/Home.js";
 import SobreNosotros from "./Components/SobreNosotros.js";
 import Servicios from "./Components/Servicios.js";
@@ -32,6 +34,7 @@ const Global = createGlobalStyle`
   }
 
   img {
+    border-radius: 0;
     max-width: 100%;
     display: block;
   }
@@ -47,6 +50,8 @@ const Global = createGlobalStyle`
     letter-spacing: -0.035em;
   }
 
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+
   ::selection { background: ${p => p.theme.colors.primary}; color: white; }
 `;
 
@@ -59,6 +64,12 @@ export default function App() {
           <Layout>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/profesionales" element={<Profesionales />} />
+              <Route path="/profesionales/suministro" element={<ServicioProfesional service="suministro" />} />
+              <Route path="/profesionales/apoyo-tecnico" element={<ServicioProfesional service="apoyo-tecnico" />} />
+              <Route path="/profesionales/instalacion" element={<ServicioProfesional service="instalacion" />} />
+              <Route path="/profesionales/formacion" element={<Navigate to="/profesionales/asesoramiento-tecnico" replace />} />
+              <Route path="/profesionales/asesoramiento-tecnico" element={<ServicioProfesional service="asesoramiento-tecnico" />} />
               <Route path="/sobrenosotros" element={<SobreNosotros />} />
               <Route path="/servicios" element={<Servicios />} />
               <Route path="/contacto" element={<ContactForm />} />

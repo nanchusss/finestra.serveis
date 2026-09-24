@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { FaInstagram, FaWhatsapp, FaBars, FaTimes } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink as RouterNavLink, useLocation } from "react-router-dom";
 import logo from "../Images/logo.png";
 import { useLanguage } from "../i18n";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 
 /* ===== COMPONENT ===== */
@@ -11,11 +12,34 @@ import { useLanguage } from "../i18n";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
-  const {lang,setLang,t}=useLanguage();
+  const menuRef = useRef(null);
+  const toggleRef = useRef(null);
+  const {t}=useLanguage();
   React.useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "instant" });
     setOpen(false);
   }, [location.pathname]);
+  React.useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const firstButton = menuRef.current.querySelector("button");
+    firstButton?.focus();
+    const onKey = event => {
+      if (event.key === "Escape") { setOpen(false); toggleRef.current?.focus(); }
+      if (event.key === "Tab") {
+        const nodes = menuRef.current.querySelectorAll("a[href], button");
+        const first = nodes[0], last = nodes[nodes.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      }
+    };
+    const media = window.matchMedia("(min-width: 1281px)");
+    const onResize = event => { if (event.matches) setOpen(false); };
+    media.addEventListener("change", onResize);
+    document.addEventListener("keydown", onKey);
+    return () => { document.body.style.overflow = previousOverflow; document.removeEventListener("keydown", onKey); media.removeEventListener("change", onResize); };
+  }, [open]);
 
   return (
     <>
@@ -34,19 +58,21 @@ export default function Navbar() {
 
       <Bar>
         <Inner>
-          <Brand to="/">
+          <Brand to="/" aria-label={`${t("home")} · Finestra Serveis`}>
             <Logo src={logo} alt="Finestra Serveis" />
           </Brand>
 
           <Actions>
-            <NavLink to="/servicios">{t("services")}</NavLink>
+            <NavLink to="/">{t("home")}</NavLink>
+            <NavLink to="/servicios">{t("navSolutions")}</NavLink>
+            <NavLink to="/profesionales">{t("professionals")}</NavLink>
             <NavLink to="/sobrenosotros">{t("about")}</NavLink>
             <NavLink to="/contacto">{t("contact")}</NavLink>
-            <Lang aria-label="Idioma" value={lang} onChange={e=>setLang(e.target.value)}><option value="es">ES</option><option value="ca">CA</option><option value="en">EN</option></Lang>
+            <LanguageSwitcher />
             <CTA to="/contacto">{t("quote")}</CTA>
           </Actions>
 
-          <MenuToggle onClick={() => setOpen(true)}>
+          <MenuToggle ref={toggleRef} aria-label="Abrir menú" aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen(true)}>
             <FaBars />
           </MenuToggle>
         </Inner>
@@ -54,15 +80,17 @@ export default function Navbar() {
 
       <Overlay open={open} onClick={() => setOpen(false)} />
 
-      <MobileMenu open={open}>
-        <CloseBtn onClick={() => setOpen(false)}>
+      <MobileMenu ref={menuRef} aria-hidden={!open} role="dialog" aria-modal={open ? "true" : undefined} aria-label={t("navigation")} id="mobile-navigation" open={open} inert={open ? undefined : ""}>
+        <CloseBtn aria-label="Cerrar menú" onClick={() => { setOpen(false); toggleRef.current?.focus(); }}>
           <FaTimes size={22} />
         </CloseBtn>
 
-        <MobileLink to="/servicios">{t("services")}</MobileLink>
+        <MobileLink to="/">{t("home")}</MobileLink>
+        <MobileLink to="/servicios">{t("navSolutions")}</MobileLink>
+        <MobileLink to="/profesionales">{t("professionals")}</MobileLink>
         <MobileLink to="/sobrenosotros">{t("about")}</MobileLink>
         <MobileLink to="/contacto">{t("contact")}</MobileLink>
-        <Lang value={lang} onChange={e=>setLang(e.target.value)}><option value="es">Castellano</option><option value="ca">Català</option><option value="en">English</option></Lang>
+        <LanguageSwitcher />
       </MobileMenu>
     </>
   );
@@ -119,7 +147,7 @@ const Bar = styled.header`
 `;
 
 const Inner = styled.nav`
-  max-width: ${p => p.theme.maxw};
+  max-width: 1480px;
   margin: 0 auto;
   height: 88px;
   padding: 0 28px;
@@ -127,7 +155,7 @@ const Inner = styled.nav`
   align-items: center;
   justify-content: space-between;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1280px) {
     height: 70px;
   }
 `;
@@ -135,22 +163,28 @@ const Inner = styled.nav`
 /* ===== LOGO ===== */
 
 const Brand = styled(Link)`
+  cursor: pointer;
+  flex-shrink: 0;
   display: flex;
+  img { cursor: pointer; }
+  &:focus-visible { outline: 3px solid ${p => p.theme.colors.primary}; outline-offset: 6px; }
   align-items: center;
 
   &:hover img {
-    transform: scale(1.08);
+    opacity: .85;
   }
 `;
 
 const Logo = styled.img`
-  height: 58px;
-  width: auto;
+  height: auto;
+  width: 166px;
+  max-width: 166px;
   object-fit: contain;
   transition: transform .3s ease;
 
-  @media (max-width: 900px) {
-    height: 55px;
+  @media (max-width: 1280px) {
+    height: auto;
+    width: 146px;
   }
 `;
 
@@ -159,14 +193,18 @@ const Logo = styled.img`
 const Actions = styled.div`
   display: flex;
   align-items: center;
-  gap: 38px;
+  display: grid;
+  grid-template-columns: 54px 96px 130px 148px 90px 118px 210px;
+  gap: 28px;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1280px) {
     display: none;
   }
 `;
 
-const NavLink = styled(Link)`
+const NavLink = styled(RouterNavLink)`
+  text-align: center;
+  white-space: nowrap;
   font-size: 12px;
   font-weight: 700;
   text-transform:uppercase;
@@ -186,14 +224,16 @@ const NavLink = styled(Link)`
     transition: width .25s ease;
   }
 
-  &:hover::after {
+  &[aria-current="page"]::after, &:hover::after {
     width: 100%;
   }
 `;
 
 const CTA = styled(Link)`
-  padding: 15px 20px;
-  border-radius: 0;
+  padding: 15px 12px;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 999px;
   font-weight: 700;
   font-size:12px;
   text-transform:uppercase;
@@ -208,18 +248,17 @@ const CTA = styled(Link)`
     transform: translateY(-3px);
   }
 `;
-const Lang=styled.select`border:1px solid ${p=>p.theme.colors.border};background:rgba(255,255,255,.45);border-radius:9px;padding:10px 8px;color:${p=>p.theme.colors.ink};font:600 11px ${p=>p.theme.fonts.primary};cursor:pointer`;
 
 /* ===== MOBILE ===== */
 
 const MenuToggle = styled.button`
   display: none;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1280px) {
     display: flex;
     width: 42px;
     height: 42px;
-    border-radius: 2px;
+    border-radius: 50%;
     align-items: center;
     justify-content: center;
     border: 1px solid ${p => p.theme.colors.border};
@@ -236,7 +275,7 @@ const Overlay = styled.div`
   opacity: ${p => (p.open ? 1 : 0)};
   pointer-events: ${p => (p.open ? "auto" : "none")};
   transition: opacity .3s ease;
-  z-index: 79;
+  z-index: 101;
 `;
 
 const MobileMenu = styled.aside`
@@ -244,26 +283,29 @@ const MobileMenu = styled.aside`
   top: 0;
   right: 0;
   width: min(90vw, 360px);
-  height: 100%;
+  height: 100dvh;
+  overflow-y: auto;
   background: ${p=>p.theme.colors.cream};
   color: ${p => p.theme.colors.text};
   padding: 100px 30px 40px 30px;
   transform: translateX(${p => (p.open ? "0%" : "100%")});
   transition: transform .35s cubic-bezier(.77,0,.18,1);
+  @media(prefers-reduced-motion: reduce) { transition: none; }
   display: flex;
   flex-direction: column;
   gap: 28px;
   box-shadow: -20px 0 50px rgba(0,0,0,0.15);
-  z-index: 80;
+  z-index: 102;
 `;
 
-const MobileLink = styled(Link)`
+const MobileLink = styled(RouterNavLink)`
   font-size: 20px;
   font-weight: 600;
   text-decoration: none;
   color: ${p => p.theme.colors.text};
   padding-bottom: 8px;
   border-bottom: 1px solid ${p => p.theme.colors.border};
+  &[aria-current="page"] { color: ${p => p.theme.colors.primary}; border-bottom-color: ${p => p.theme.colors.primary}; }
   transition: all .2s ease;
 
   &:hover {

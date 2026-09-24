@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 
 import Hero from "../Hero";
+import ProfessionalBanner from "../ProfessionalBanner";
 import Stats from "../Stats";
 import VanShowcase from "../VanShowCase";
 import Pasarela from "../Pasarela";
@@ -63,11 +64,14 @@ export default function Home() {
         <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </Helmet>
 
+      <main>
       <Hero />
+      <ProfessionalBanner />
+      <Pasarela />
       <Stats />
       <CucyoCoverage />
-      <Pasarela />
       <VanShowcase />
+      </main>
     </>
   );
 }

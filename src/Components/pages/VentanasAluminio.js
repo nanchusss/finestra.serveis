@@ -72,7 +72,7 @@ const GalleryGrid = styled.div`
 const ImageCard = styled.div`
   position: relative;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 0;
   cursor: pointer;
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 
